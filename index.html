@@ -14,12 +14,12 @@ body{background:var(--cream);color:var(--ink);font-family:'Jost',sans-serif;over
 body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.032;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px 180px;}
 .cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--sepia);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:all .18s;mix-blend-mode:multiply;display:none;}
 .cursor-dot{position:fixed;width:5px;height:5px;background:var(--sepia-dark);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);display:none;}
-.nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:28px 60px;transition:all .5s ease;}
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:28px 60px;transition:all .5s ease;direction:ltr;}
 .nav.scrolled,.nav.dark{background:rgba(245,240,232,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(139,111,78,.15);padding:18px 60px;box-shadow:0 14px 36px rgba(26,20,16,.08);}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;letter-spacing:3px;color:var(--ink);text-decoration:none;text-transform:uppercase;}
-.nav-logo span{color:var(--gold);}.nav-right{display:flex;align-items:center;gap:36px;}
-.nav-contact{font-size:12px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-mid);text-decoration:none;transition:color .2s;}
-.nav-contact:hover{color:var(--sepia-dark);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;letter-spacing:3px;color:var(--ink);text-decoration:none;text-transform:uppercase;direction:ltr;unicode-bidi:isolate;white-space:nowrap;}
+.nav-logo span{color:var(--gold);}.nav-right{display:flex;align-items:center;gap:36px;direction:rtl;}
+.nav-contact{display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink);text-decoration:none;background:linear-gradient(135deg,var(--gold-light),var(--gold));border:1px solid rgba(245,240,232,.55);padding:11px 20px;border-radius:999px;box-shadow:0 14px 34px rgba(26,20,16,.22),0 0 0 1px rgba(212,168,74,.24);transition:transform .2s,box-shadow .2s,background .2s;}
+.nav-contact:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(26,20,16,.28),0 0 0 1px rgba(212,168,74,.36);}
 .hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-start;}
 .hero-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1800&auto=format&fit=crop') center/cover no-repeat;transform:scale(1.05);animation:heroZoom 20s ease-in-out infinite alternate;}
 .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(26,20,16,.25) 0%,rgba(26,20,16,.05) 40%,rgba(26,20,16,0.90) 100%);}
@@ -117,7 +117,7 @@ footer{background:var(--ink);padding:32px 60px;display:flex;justify-content:spac
 .reveal.vis{opacity:1;transform:translateY(0);}
 .rd1{transition-delay:.1s;}.rd2{transition-delay:.2s;}.rd3{transition-delay:.3s;}
 @media(max-width:1024px){.cards-grid{grid-template-columns:1fr 1fr;}.philosophy{grid-template-columns:1fr;gap:40px;}.contact-strip{grid-template-columns:1fr;}.photo-grid{columns:2;}.nav{padding:22px 32px;}.categories-section,.gallery-body{padding:72px 32px 100px;}.contact-strip{padding:60px 32px;}footer{padding:28px 32px;}}
-@media(max-width:640px){.cards-grid{grid-template-columns:1fr;}.photo-grid{columns:2;column-gap:10px;}.photo-item{margin-bottom:10px;border-radius:6px;}.hero-img{background-size:auto 74%;background-position:85% 24%;transform:scale(1);animation:none;}.hero-content,.gallery-hero-content{padding:0 28px 48px;}.hero-scroll{display:none;}body{cursor:auto;}.cursor-ring,.cursor-dot{display:none;}}
+@media(max-width:640px){.cards-grid{grid-template-columns:1fr;}.photo-grid{columns:2;column-gap:10px;}.photo-item{margin-bottom:10px;border-radius:6px;}.hero-img{background-size:auto 74%;background-position:85% 24%;transform:scale(1);animation:none;}.nav{padding:18px 16px;gap:12px;}.nav.scrolled,.nav.dark{padding:14px 16px;}.nav-logo{font-size:13px;letter-spacing:1.4px;white-space:nowrap;}.nav-contact{position:fixed;top:18px;right:16px;z-index:700;font-size:10px;letter-spacing:.4px;padding:9px 12px;white-space:nowrap;}.nav.scrolled .nav-contact,.nav.dark .nav-contact{top:14px;}.hero-content,.gallery-hero-content{padding:0 28px 48px;}.hero-scroll{display:none;}body{cursor:auto;}.cursor-ring,.cursor-dot{display:none;}}
 </style></head><body>
 <div class="cursor-ring" id="cRing"></div><div class="cursor-dot" id="cDot"></div>
 <div class="profile-bubble" id="profileBubble">
@@ -144,7 +144,7 @@ footer{background:var(--ink);padding:32px 60px;display:flex;justify-content:spac
     <div class="section-header reveal"><div class="s-eyebrow">התמחויות שלנו</div><h2 class="s-title">כל שמחה,<br><em>נשמרת לנצח</em></h2></div>
     <div class="cards-grid">
   <div class="cat-card reveal rd1" onclick="openGallery('barMitzvah')">
-    <div class="cat-img-wrap"><img class="cat-img" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop" alt="בר/ת מצווה"/>
+    <div class="cat-img-wrap"><img class="cat-img" src="lens-bar-mitzvah/bar-mitzvah-1.jpg" alt="בר/ת מצווה"/>
       <div class="cat-overlay"><div class="cat-num">01</div><div class="cat-name">בר/ת מצווה</div>
         <div class="cat-desc">הגאווה, החגיגה, האנרגיה של רגע מכונן — נשמר לכל החיים.</div><button class="cat-btn">לגלריה →</button></div>
       <div class="cat-tag">בר/ת מצווה</div></div></div>
@@ -213,7 +213,19 @@ const britMilaPhotos=[
 "lens-brit-mila/brit-mila-34.jpg",
 "lens-brit-mila/brit-mila-35.jpg"
 ];
-const galleries={"barMitzvah":{"title":"בר/ת מצווה","hero":"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1800","photos":["https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800","https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800","https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=800"]},"britMila":{"title":"ברית מילה","hero":britMilaPhotos[0],"photos":britMilaPhotos}};
+const barMitzvahPhotos=[
+"lens-bar-mitzvah/bar-mitzvah-1.jpg",
+"lens-bar-mitzvah/bar-mitzvah-2.jpg",
+"lens-bar-mitzvah/bar-mitzvah-3.jpg",
+"lens-bar-mitzvah/bar-mitzvah-4.jpg",
+"lens-bar-mitzvah/bar-mitzvah-5.jpg",
+"lens-bar-mitzvah/bar-mitzvah-6.jpg",
+"lens-bar-mitzvah/bar-mitzvah-7.jpg",
+"lens-bar-mitzvah/bar-mitzvah-8.jpg",
+"lens-bar-mitzvah/bar-mitzvah-9.jpg",
+"lens-bar-mitzvah/bar-mitzvah-10.jpg"
+];
+const galleries={"barMitzvah":{"title":"בר/ת מצווה","hero":barMitzvahPhotos[0],"photos":barMitzvahPhotos},"britMila":{"title":"ברית מילה","hero":britMilaPhotos[0],"photos":britMilaPhotos}};
 let currentPhotos=[],currentLBIdx=0;
 const cRing=document.getElementById('cRing'),cDot=document.getElementById('cDot');
 let mx=0,my=0,rx=0,ry=0;
