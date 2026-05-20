@@ -30,6 +30,7 @@ body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;
 .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,7vw,100px);font-weight:300;line-height:1;color:var(--cream);letter-spacing:-1px;}
 .hero h1 em{font-style:italic;font-weight:600;color:#F0D9B5;}
 .hero-sub{margin-top:20px;font-size:15px;font-weight:300;color:rgba(245,240,232,.72);letter-spacing:.5px;max-width:400px;line-height:1.7;}
+.hero-note{margin-top:18px;display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:500;letter-spacing:1.4px;color:var(--ink);background:rgba(240,217,181,.9);border:1px solid rgba(245,240,232,.35);padding:10px 18px;border-radius:999px;box-shadow:0 14px 40px rgba(26,20,16,.22);}
 .hero-scroll{position:absolute;right:60px;bottom:80px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:12px;}
 .hero-scroll span{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(245,240,232,.5);writing-mode:vertical-rl;}
 .scroll-line{width:1px;height:60px;background:linear-gradient(180deg,rgba(245,240,232,.5),transparent);animation:scrollDrop 2s ease-in-out infinite;}
@@ -136,7 +137,7 @@ footer{background:var(--ink);padding:32px 60px;display:flex;justify-content:spac
 <div id="homePage">
   <section class="hero"><div class="hero-img"></div>
     <div class="hero-content"><div class="hero-eyebrow">צילום וזיכרונות</div>
-      <h1>רגעים שנשארים<br><em>לנצח</em></h1><p class="hero-sub">צילום מקצועי לאירועים הכי מיוחדים בחייכם — בחום, באמנות ובאהבה.</p></div>
+      <div class="hero-note">מחירים נוחים ושירות מכל הלב</div><h1>רגעים שנשארים<br><em>לנצח</em></h1><p class="hero-sub">צילום מקצועי לאירועים הכי מיוחדים בחייכם — בחום, באמנות ובאהבה.</p></div>
     <div class="hero-scroll"><div class="scroll-line"></div><span>גלול</span></div></section>
   <div class="intro-strip reveal"><p class="intro-quote">"כל פריים מספר סיפור. כל סיפור ראוי להיות מסופר בצורה יפה."</p>
     <div class="intro-stat"><div class="intro-stat-num" style="font-size:32px;line-height:1.2;">ניסיון<br>עשיר</div></div></div>
@@ -165,6 +166,7 @@ footer{background:var(--ink);padding:32px 60px;display:flex;justify-content:spac
     <div><h2>בואו ניצור<br><em>זיכרונות יחד</em></h2></div>
     <div class="contact-right">
       <div class="contact-row"><span class="contact-row-label">טלפון</span><span class="contact-row-val">055-318-8848</span></div>
+      <div class="contact-row"><span class="contact-row-label">מחירים</span><span class="contact-row-val">נוחים ומתאימים לכל אירוע</span></div>
       <div class="contact-row"><span class="contact-row-label">אימייל</span><span class="contact-row-val">lens@memories.co.il</span></div>
       <div class="contact-row"><span class="contact-row-label">אזור</span><span class="contact-row-val">כל הארץ</span></div>
       <a href="https://wa.me/972553188848?text=%D7%90%D7%A9%D7%9E%D7%97%20%D7%A9%D7%AA%D7%91%D7%95%D7%90%20%D7%9C%D7%A6%D7%9C%D7%9D%20%D7%91" target="_blank" style="text-decoration:none;"><button class="contact-btn">שלחו הודעה ב-WhatsApp</button></a></div></section>
