@@ -1318,6 +1318,16 @@
 
       <nav class="nav" aria-label="ניווט עורך">
         <button class="active" data-panel="visual"><i data-lucide="mouse-pointer-click"></i><span>עריכה באתר</span></button>
+        <button data-panel="dashboard"><i data-lucide="layout-dashboard"></i><span>סקירה</span></button>
+        <button data-panel="products"><i data-lucide="package"></i><span>מוצרים</span></button>
+        <button data-panel="site"><i data-lucide="settings-2"></i><span>תוכן האתר</span></button>
+        <button data-panel="content"><i data-lucide="panels-top-left"></i><span>כל העמודים</span></button>
+        <button data-panel="words"><i data-lucide="text-cursor-input"></i><span>כל מילה</span></button>
+        <button data-panel="pages"><i data-lucide="file-pen-line"></i><span>עמודי מקור</span></button>
+        <button data-panel="source"><i data-lucide="code-2"></i><span>הקוד המלא</span></button>
+        <button data-panel="design"><i data-lucide="palette"></i><span>עיצוב</span></button>
+        <button data-panel="preview"><i data-lucide="monitor-smartphone"></i><span>תצוגה</span></button>
+        <button data-panel="export"><i data-lucide="file-json"></i><span>ייצוא</span></button>
       </nav>
 
       <div class="sidebar-footer">
@@ -1341,6 +1351,7 @@
               <option value="materials">החומרים שלי</option>
             </select>
             <button class="tool-button" id="visual-refresh" type="button"><i data-lucide="refresh-cw"></i><span>רענון</span></button>
+            <button class="tool-button primary" id="visual-add-product" type="button"><i data-lucide="plus"></i><span>מוצר חדש</span></button>
             <button class="tool-button primary" id="visual-save" type="button"><i data-lucide="save"></i><span>שמירה</span></button>
             <button class="tool-button success" id="visual-save-new-file" type="button"><i data-lucide="file-plus-2"></i><span>קובץ חדש מהשינויים</span></button>
             <button class="tool-button" id="visual-replace-target" type="button"><i data-lucide="folder-open"></i><span>החלפת קובץ יעד</span></button>
@@ -2220,9 +2231,10 @@
     }
 
     function switchPanel(panelName) {
-      panelName = "visual";
-      els.panels.forEach((panel) => panel.classList.toggle("active", panel.id === `panel-${panelName}`));
-      els.navButtons.forEach((button) => button.classList.toggle("active", button.dataset.panel === panelName));
+      const targetPanel = document.getElementById(`panel-${panelName}`) ? panelName : "visual";
+      els.panels.forEach((panel) => panel.classList.toggle("active", panel.id === `panel-${targetPanel}`));
+      els.navButtons.forEach((button) => button.classList.toggle("active", button.dataset.panel === targetPanel));
+      if (targetPanel === "export") updateExport();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -3955,6 +3967,7 @@
     document.getElementById("source-save-new-file").addEventListener("click", saveCurrentChangesAsNewStoreFile);
     document.getElementById("source-save-store").addEventListener("click", saveToRealStoreFile);
     document.getElementById("visual-refresh").addEventListener("click", loadVisualStoreEditor);
+    document.getElementById("visual-add-product").addEventListener("click", addProduct);
     document.getElementById("visual-save").addEventListener("click", saveVisualSelection);
     document.getElementById("visual-save-new-file").addEventListener("click", saveVisualSelectionAsNewFile);
     document.getElementById("visual-replace-target").addEventListener("click", replaceTargetStoreFile);
