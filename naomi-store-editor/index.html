@@ -2396,6 +2396,14 @@
       saveState("המוצר נשמר");
     }
 
+    function saveProductToWebsiteSource() {
+      updateProductFromForm();
+      if (!syncProductsToWebsiteSource()) return;
+      renderOriginalPageEditor();
+      loadVisualStoreEditor();
+      showToast("המוצר נשמר ונוסף לעריכה באתר.");
+    }
+
     function updateSiteFromForm() {
       Object.keys(state.settings).forEach((key) => {
         const field = els.siteForm.elements[key];
@@ -3305,6 +3313,57 @@
       refreshSourcePreview();
     }
 
+    function findMatchingBracket(source, startIndex) {
+      let depth = 0;
+      let quote = "";
+      let escaped = false;
+      for (let index = startIndex; index < source.length; index += 1) {
+        const char = source[index];
+        if (quote) {
+          if (escaped) escaped = false;
+          else if (char === "\\") escaped = true;
+          else if (char === quote) quote = "";
+          continue;
+        }
+        if (char === "\"" || char === "'" || char === "`") {
+          quote = char;
+          continue;
+        }
+        if (char === "[") depth += 1;
+        if (char === "]") {
+          depth -= 1;
+          if (depth === 0) return index;
+        }
+      }
+      return -1;
+    }
+
+    function syncProductsToWebsiteSource() {
+      let pages;
+      try {
+        pages = extractPagesFromSource();
+      } catch (error) {
+        showToast("לא הצלחתי לקרוא את מקור האתר כדי להוסיף את המוצר.");
+        return false;
+      }
+      const home = pages.home || "";
+      const startMatch = home.match(/const\s+products\s*=\s*\[/);
+      if (!startMatch) {
+        showToast("לא מצאתי את רשימת המוצרים בקוד האתר.");
+        return false;
+      }
+      const arrayStart = startMatch.index + startMatch[0].lastIndexOf("[");
+      const arrayEnd = findMatchingBracket(home, arrayStart);
+      if (arrayEnd < 0) {
+        showToast("רשימת המוצרים בקוד האתר לא נסגרה בצורה תקינה.");
+        return false;
+      }
+      const productsLiteral = JSON.stringify(state.products, null, 2).replace(/<\/script/gi, "<\\/script");
+      pages.home = `${home.slice(0, arrayStart)}${productsLiteral}${home.slice(arrayEnd + 1)}`;
+      writePagesToSource(pages);
+      return true;
+    }
+
     function parsePageHtml(html) {
       return new DOMParser().parseFromString(html, "text/html");
     }
@@ -3962,7 +4021,7 @@
     document.getElementById("add-product").addEventListener("click", addProduct);
     document.getElementById("add-content-item").addEventListener("click", addContentItem);
     document.getElementById("refresh-words").addEventListener("click", renderWordEditor);
-    document.getElementById("save-product").addEventListener("click", updateProductFromForm);
+    document.getElementById("save-product").addEventListener("click", saveProductToWebsiteSource);
     document.getElementById("apply-raw-json").addEventListener("click", applyRawJson);
     document.getElementById("source-preview-refresh").addEventListener("click", refreshSourcePreview);
     document.getElementById("source-save-version").addEventListener("click", commitSourceVersion);
