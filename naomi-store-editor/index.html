@@ -1529,6 +1529,9 @@
                 <textarea id="enShortDesc" name="enShortDesc"></textarea>
               </div>
             </div>
+            <div class="actions">
+              <button class="tool-button primary" id="save-product" type="button"><i data-lucide="save"></i><span>שמירת מוצר</span></button>
+            </div>
           </form>
         </div>
       </section>
@@ -3959,6 +3962,7 @@
     document.getElementById("add-product").addEventListener("click", addProduct);
     document.getElementById("add-content-item").addEventListener("click", addContentItem);
     document.getElementById("refresh-words").addEventListener("click", renderWordEditor);
+    document.getElementById("save-product").addEventListener("click", updateProductFromForm);
     document.getElementById("apply-raw-json").addEventListener("click", applyRawJson);
     document.getElementById("source-preview-refresh").addEventListener("click", refreshSourcePreview);
     document.getElementById("source-save-version").addEventListener("click", commitSourceVersion);
